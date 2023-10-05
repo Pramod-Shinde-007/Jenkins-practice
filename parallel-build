@@ -11,9 +11,23 @@ pipeline {
                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Pramod-Shinde-007/Jenkins-practice.git']])
             }
         }
+        stage('Run Tests') {
+            parallel {
+                stage('Sonar-scan') {
+                    steps {
+                        echo "sonar scan success"
+                    }    
+                }
+                stage('unit-test') {
+                    steps {
+                        echo "running unit test"
+                    }
+                }
+            }
+        }
         stage('building-source-code') {
             steps {
-                sh 'mvn clean package'
+                  sh 'mvn clean package'
             }
         }
         stage('deploy-to-tomcat') {

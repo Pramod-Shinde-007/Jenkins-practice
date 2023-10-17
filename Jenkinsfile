@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'M2_home'
+        maven 'maven'
     }    
 
     stages {
@@ -18,7 +18,7 @@ pipeline {
         }
         stage('deploy-to-tomcat') {
             steps {
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://44.211.204.1:8080')], contextPath: '/app', war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat9', path: '', url: 'http://13.232.253.140:8080')], contextPath: '/app', war: '**/*war'
             }
         }
     }
